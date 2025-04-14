@@ -2,6 +2,7 @@ create database db_Batch8_capstone;
  
 use db_Batch8_capstone;
 
+-- table
 CREATE TABLE Users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
