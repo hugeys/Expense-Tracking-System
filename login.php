@@ -6,12 +6,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = htmlspecialchars(trim($_POST['password']));
 
     if (!empty($email) && !empty($password)) {
-        $result = $conn->query("SELECT user_id, name, password FROM Users WHERE email = '$email'");
+        $result = $conn->query("SELECT user_id, name, password, role FROM Users WHERE email = '$email'");
+        
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
                 $_SESSION["user_id"] = $row['user_id'];
+                $_SESSION["role"] = $row['role'];
                 header("Location: dashboard.php");
                 exit();
             } else {
@@ -24,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>Please fill in all fields.</p>";
     }
 }
+logAction($conn, $_SESSION['user_id'], "Logged in");
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label>Password:</label>
         <input type="password" name="password" required><br><br>
         <button type="submit">Login</button>
+        
     </form>
     <br>
     <a href="register.php">Register</a>
