@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once("connection.php");
 include_once("function.php");
 
@@ -8,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($email) && !empty($password)) {
         $result = $conn->query("SELECT user_id, name, password, role FROM Users WHERE email = '$email'");
-        
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -28,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>Please fill in all fields.</p>";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f7;
+            background-image: url('c:\Users\CL1-PC29\Downloads\istockphoto-1424757003-612x612.jpg'); /* Add your background image here */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -49,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .login-container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 30px;
@@ -89,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         button {
             width: 100%;
             padding: 10px;
-            background-color:rgb(175, 76, 153);
+            background-color: rgb(175, 76, 153);
             color: white;
             border: none;
             border-radius: 4px;
@@ -105,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         a {
             text-align: center;
             display: block;
-            color:rgb(175, 76, 145);
+            color: rgb(175, 76, 145);
             margin-top: 15px;
             text-decoration: none;
         }
